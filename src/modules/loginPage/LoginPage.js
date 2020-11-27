@@ -107,7 +107,6 @@ class LoginPage extends Component {
         const controls = {...formControls[controlName]};
 
         controls.value = event.target.value;
-        debugger;
         controls.touched = true;
         controls.valid = this.validateControl(controls.value, controls.validation);
 
