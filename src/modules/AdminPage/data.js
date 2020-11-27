@@ -5,11 +5,13 @@ export const headerList = {
     position: 'Должность',
     rights: 'Права',
     active: 'Активность',
+    edit: 'Редактировать'
 };
 
 export const getData = () => {
     const data = [];
     for (let i = 1; i < 1000; i++) {
+        const model = '';
         data.push(
             {
                 number: i,
@@ -17,7 +19,8 @@ export const getData = () => {
                 organization: i,
                 position: i,
                 rights: i,
-                active: i
+                active: i,
+                model: model
             }
         );
     }
