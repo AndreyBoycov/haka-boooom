@@ -5,6 +5,7 @@ import TablePage from '../src/modules/TablePage/TablePage';
 import LoginPage from "./modules/loginPage/LoginPage";
 import NavBar from "./modules/NavBar/NavBar";
 import PersonalAccount from "./modules/PersonalAccount/PersonalAccount";
+import AdminPage from "./modules/AdminPage/AdminPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" exact render={() => <h1>HomePage</h1>} />
         <Route path="/table" component={TablePage} />
         <Route path="/personalAccount" component={PersonalAccount} />
+        <Route path="/admin_panel" component={AdminPage} />
     </div>
   );
 }
