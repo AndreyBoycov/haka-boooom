@@ -15,11 +15,15 @@ function App() {
 
             </NavBar>
         </nav>
-        <Route path="/login" component={LoginPage} />
-        <Route path="/" exact render={() => <h1>HomePage</h1>} />
-        <Route path="/table" component={TablePage} />
-        <Route path="/personalAccount" component={PersonalAccount} />
-        <Route path="/admin_panel" component={AdminPage} />
+
+        <div className="Content">
+            <Route path="/login" component={LoginPage} />
+            <Route path="/" exact render={() => <h1>HomePage</h1>} />
+            <Route path="/table" component={TablePage} />
+            <Route path="/personalAccount" component={PersonalAccount} />
+            <Route path="/admin_panel" component={AdminPage} />
+        </div>
+
     </div>
   );
 }
