@@ -3,6 +3,7 @@ import './App.css';
 import React from "react";
 import TablePage from '../src/modules/TablePage/TablePage';
 import LoginPage from "./modules/loginPage/LoginPage";
+import AdminPage from "./modules/AdminPage/AdminPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/login" component={LoginPage} />
         <Route path="/" exact render={() => <h1>HomePage</h1>} />
         <Route path="/table" component={TablePage} />
+        <Route path="/admin_panel" component={AdminPage} />
     </div>
   );
 }
