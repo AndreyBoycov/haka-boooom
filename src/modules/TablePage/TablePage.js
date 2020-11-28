@@ -35,6 +35,10 @@ const TablePage = props => {
             <CreateRequestPage2
                 requestDescription={
                     {
+                        category: requestModel?.category,
+                        theme: requestModel?.theme,
+                        shortName: requestModel?.shortName,
+                        description: requestModel?.description,
                         descriptionDefect: requestModel?.descriptionDefect,
                         descriptionDecide: requestModel?.descriptionDecide,
                         positiveEffect: requestModel?.positiveEffect

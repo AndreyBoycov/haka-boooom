@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import './CreateRequestPage2.scss';
+import RequestShortInfo from "../RequestShortInfo/RequestShortInfo";
 
 const PLACEHOLDER_DESCRIPTION_DEFECT = 'характеристика проблемы, которую решает рационализаторское предложение,\n' +
     'должна описывать недостатки действующей конструкции изделия, технологии\n' +
@@ -21,8 +22,15 @@ const CreateRequestPage2 = (props) => {
     const [ requestDescriptionStep, setRequestDescriptionStep ] = useState(requestDescription);
 
     return (
-        <div className='content_block'>
-            <div>
+        <>
+            <RequestShortInfo shortInfoProp={{
+                category: requestDescriptionStep?.category,
+                theme: requestDescriptionStep?.theme,
+                shortName: requestDescriptionStep?.shortName,
+                description: requestDescriptionStep?.description
+            }}/>
+            <div className='content_block'>
+                <div>
                 <span>Описание действительного положения с указанием существующих недостатков:</span>
                 <TextField
                     multiline
@@ -33,7 +41,7 @@ const CreateRequestPage2 = (props) => {
                 />
             </div>
 
-            <div>
+                <div>
                 <span>Описание предлагаемого решения:</span>
                 <TextField
                     multiline
@@ -44,7 +52,7 @@ const CreateRequestPage2 = (props) => {
                 />
             </div>
 
-            <div>
+                <div>
                 <span>Ожидаемый положительный эффект от использования (технический, организационный,<br/>управленческий или иной):</span>
                 <TextField
                     multiline
@@ -54,7 +62,8 @@ const CreateRequestPage2 = (props) => {
                     variant="outlined"
                 />
             </div>
-        </div>
+            </div>
+        </>
     );
 };
 
