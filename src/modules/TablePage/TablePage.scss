@@ -1,8 +1,12 @@
 .head-body{
+  height: calc(100% - 1em);
+  display: grid;
   padding: 1em 0 0 1em;
   .button-next-table-page {
-    margin-right: 77rem;
-    margin-top: 1em;
+    height: 3em;
+    justify-self: baseline;
+    align-self: center;
+    width: 10em;
     background: #007ACE;
     box-shadow: 0px 1px 0px rgba(22, 29, 37, 0.1), inset 0px 1px 0px rgba(255, 255, 255, 0.06);
     border-radius: 3px;
