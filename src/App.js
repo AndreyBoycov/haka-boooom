@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App">
         <NavBar />
-        <div className="Content">
+        <div className="Content" style={{padding: '0'}}>
             { renderRouters() }
             <Route path="/" exact render={() => <h1>HomePage</h1>} />
         </div>
