@@ -1,0 +1,12 @@
+.dialog_content{
+    display: grid;
+    margin: 0 10px;
+}
+
+.fio_form{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.fio_form > div {
+    padding: 0 5px;
+}

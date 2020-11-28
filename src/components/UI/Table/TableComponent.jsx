@@ -4,8 +4,21 @@ import TableHeader from "./Head/TableHeader";
 import TableBodyData from "./Body/TableBodyData";
 import Paginator from "./Paginator/Paginator";
 
+const getDataListWithoutInvisibleKeys = (dataList, invisibleKeysList) => {
+    return dataList.map(row => {
+        for (const rowKey in row) {
+            if (invisibleKeysList.includes(rowKey)) {
+                delete row[rowKey];
+            }
+        }
+
+        return row;
+    });
+};
+
 const TableComponent = (props) => {
     const {
+        invisibleKeysList = [],
         headerList,
         dataList,
         count,
@@ -15,7 +28,7 @@ const TableComponent = (props) => {
     } = props;
 
     const [numberPage, setNumberPage] = useState(1);
-    const [rowsPerPage, setRowsPerPage] = useState(pageSizesList[0]);
+    const [rowsPerPage, setRowsPerPage] = useState(1);
 
     const handleChangePage = (event, page) => {
         setNumberPage(page);
@@ -35,7 +48,7 @@ const TableComponent = (props) => {
     return (
         <Table>
             <TableHeader headerList={headerList} />
-            <TableBodyData rows={dataList} />
+            <TableBodyData rows={getDataListWithoutInvisibleKeys(dataList, invisibleKeysList)} />
             <Paginator
                 headersSize={headerList.length}
                 pageSizesList={pageSizesList}

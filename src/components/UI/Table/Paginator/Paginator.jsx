@@ -11,7 +11,6 @@ const getLabelDisplayedRows = ({from, to, count}) =>
 
 const Paginator = (props) => {
     const {
-        headersSize,
         pageSizesList,
         count,
         rowsPerPage,
