@@ -1,0 +1,27 @@
+.up_linear {
+  display: grid;
+  grid-template-rows: 3em 1fr;
+  padding-left: 2em;
+  height: 100%;
+  .top-body{
+    .person-button {
+      width: 10em;
+      height: 100%;
+      align-items: center;
+      background: #007ACE;
+      display: flex;
+    }
+    .out {
+      height: 100%;
+      align-items: center;
+      background: #007ACE;
+    }
+    .text {
+      color: #BDBDBD;
+      align-self: flex-end;
+    }
+    display: flex;
+    align-items: flex-end;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.23);
+  }
+}
