@@ -4,7 +4,6 @@ import React from "react";
 import './ApplicationRoot.scss'
 
 const ApplicationRoot = props => {
-debugger;
     return(
         <div className='has-result'>
             <div className='description-result'>
