@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import './NavBar.scss'
 import {NavLink} from "react-router-dom";
 import {TABLE_PAGE_PATH} from "../../routers";
+import LK from '../../images/LK.svg'
 
 // class NavBar extends Component {
 
@@ -23,35 +24,34 @@ const NavBar = (props) => {
             <div style={{backgroundColor: '#ffffff',
                          display: 'grid',
                          alignItems: 'center',
-                         gridTemplateColumns: 'auto 1fr 7em',
-                         height: '8.5rem'}}>
-                <img src={logoRooss} alt=";jgf"/>
+                         gridTemplateColumns: 'auto 1fr',
+                         height: '5rem'}}>
+                <img style={{height: '3em'}} src={logoRooss} alt=";jgf"/>
                 <div className='up_linear'>
-                    <div className='top-body'>
-                        <span className='text'>По приморскому краю</span>
+                    {/*<div className='top-body'>*/}
+                    {/*    <span className='text'>По приморскому краю</span>*/}
 
-                        <div className='account_panel'>
-                            {false &&
-                            <Button href={'/login'}
-                                    className='out'>
-                                <SvgIcon component={DirectionsWalkIcon}/>
-                            </Button>
-                            }
-
-                            <Button href={"/personalAccount"}
-                                    className='person-button'
-                                    title='Personal Account'>
-                                <SvgIcon component={AccountBoxIcon}/>
-                                Личный кабинет
-                            </Button>
-                        </div>
-                    </div>
+                    {/*    <div className='account_panel'>*/}
+                    {/*        {false &&*/}
+                    {/*        <Button href={'/login'}*/}
+                    {/*                className='out'>*/}
+                    {/*            <SvgIcon component={DirectionsWalkIcon}/>*/}
+                    {/*        </Button>*/}
+                    {/*        }*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
 
                     <div className="bottom_block">
-                        <span style={{width: '22rem'}} className='text text_20px'>Цифровое сообщество по рационализаторской деятельности</span>
+                        <span style={{width: '22rem', fontSize: '13px'}} className='text text_20px'>Цифровое сообщество по рационализаторской деятельности</span>
                         <div className='menu_panel'>
                             <NavLink className="text_15px" to={TABLE_PAGE_PATH}>Добавить рац. предложение</NavLink>
                         </div>
+                        <Button href={"/personalAccount"}
+                                style={{width: '10em'}}
+                                title='Personal Account'>
+                            <img title='Личный кабинет' src={LK} alt=""/>
+
+                        </Button>
                     </div>
                 </div>
             </div>
