@@ -3,6 +3,11 @@ import {Table} from "@material-ui/core";
 import TableHeader from "./Head/TableHeader";
 import TableBodyData from "./Body/TableBodyData";
 import Paginator from "./Paginator/Paginator";
+import TableFooter from "@material-ui/core/TableFooter";
+import TableRow from "@material-ui/core/TableRow";
+import TableContainer from "@material-ui/core/TableContainer";
+import TableBody from "@material-ui/core/TableBody";
+import TableHead from "@material-ui/core/TableHead";
 
 const getDataListWithoutInvisibleKeys = (dataList, invisibleKeysList) => {
     return dataList.map(row => {
@@ -46,19 +51,17 @@ const TableComponent = (props) => {
     }
 
     return (
-        <Table>
-            <TableHeader headerList={headerList} />
-            <TableBodyData rows={getDataListWithoutInvisibleKeys(dataList, invisibleKeysList)} />
-            <Paginator
-                headersSize={headerList.length}
-                pageSizesList={pageSizesList}
-                count={count}
-                rowsPerPage={rowsPerPage}
-                numberPage={numberPage}
-                onChangePage={handleChangePage}
-                onChangeRowsPerPage={handleChangeRowsPerPage}
-            />
-        </Table>
+        <TableContainer>
+            <Table>
+                {/*<TableHead>*/}
+                    <TableHeader headerList={headerList} />
+                {/*</TableHead>*/}
+                {/*<TableBody>*/}
+                    <TableBodyData rows={getDataListWithoutInvisibleKeys(dataList, invisibleKeysList)}>
+                    </TableBodyData>
+                {/*</TableBody>*/}
+            </Table>
+        </TableContainer>
     );
 };
 

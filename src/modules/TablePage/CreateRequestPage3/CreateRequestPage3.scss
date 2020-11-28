@@ -1,0 +1,49 @@
+.theme-grid-table {
+  display: grid;
+  justify-items: baseline;
+  .g-2-table {
+    display: grid;
+    grid-template-columns: 11em 1fr;
+    justify-items: baseline;
+    .text-c-r-p-3 {
+      font-size: 14px;
+      color: #93969a;
+    }
+    .text-black-c-r-p-3 {
+      font-size: 14px;
+      color: #333333;
+    }
+  }
+}
+.tables-c-r-p-3 {
+  padding: 1em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+    .text-sorra {
+      outline: none;
+      border: none;
+      background: none;
+      display: flex;
+      width: fit-content;
+      cursor: pointer;
+      align-items: center;
+      color: #007ACE;
+      .sorra {
+        font-size: 25px;
+      }
+    }
+}
+.custom-table {
+  width: 100%;
+  height: 1em;
+}
+.custom-input{
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  outline: none;
+  outline-offset: unset;
+  border: none;
+}

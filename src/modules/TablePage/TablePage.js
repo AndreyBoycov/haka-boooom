@@ -3,6 +3,7 @@ import './TablePage.scss'
 import Stepper from "./Stepper/StepperComponent";
 import CreateRequestPage1 from "./CreateRequestPage1/CreateRequestPage1";
 import CreateRequestPage2 from "./CreateRequestPage2/CreateRequestPage2";
+import CreateRequestPage3 from "./CreateRequestPage3/CreateRequestPage3";
 import {Button} from "@material-ui/core";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import SvgIcon from "@material-ui/core/SvgIcon";
@@ -19,6 +20,7 @@ const TablePage = props => {
     const [stepsOfCreateRequest, setStepsOfCreateRequest] = useState(STEPS_LIST);
     const [activeStep, setActiveStep] = useState(1);
     const [requestModel, setRequestModel] = useState({});
+    const [tablesSaved, setTablesSaved] = useState({dataCostItems: [], dataStage: []});
 
     const handlerSelectStep = (stepsOfCreateRequest, selectStepIndex) => {
         setStepsOfCreateRequest(stepsOfCreateRequest);
@@ -47,7 +49,12 @@ const TablePage = props => {
                 onChangeDescription={description =>
                     setRequestModel({...requestModel, ...description})
                 }
-            />
+            />,
+
+            <CreateRequestPage3 onNextStep={setNextStep}
+                                props={tablesSaved}
+                                onChangeTables={tables => {setTablesSaved({...tablesSaved, ...tables})}}
+                                />,
         ];
         return steps.find((el, i) => {
             return index === i;
@@ -65,10 +72,9 @@ const TablePage = props => {
                         <Stepper stepsList={stepsOfCreateRequest} onSelectStep={handlerSelectStep}/>
                     </div>
                 </div>
-                <div>
-
+                <div style={{height: '0'}}>
                 </div>
-                <div>
+                <div style={{overflow: 'hidden'}}>
                     { getStepRender(activeStep) }
                 </div>
 
