@@ -2,25 +2,44 @@ import React, {useState} from "react";
 import Step from "@material-ui/core/Step";
 import {StepButton} from "@material-ui/core";
 import Stepper from "@material-ui/core/Stepper";
-import styles from './Stepper.scss'
-import StepLabel from "@material-ui/core/StepLabel";
+import './Stepper.scss'
+
+const getSelectedStepIndex = (steps) => {
+    let lastSelectedIndex = 0;
+    for (let i = 0; i < steps.length; i++) {
+        if (steps[i].completed) {
+            lastSelectedIndex = i;
+        }
+    }
+
+    return lastSelectedIndex;
+}
 
 const StepperComponent = (props) => {
-    const { stepsList } = props;
+    const { stepsList, onSelectStep } = props;
     const [ steps, setSteps ] = useState(stepsList);
     const [ activeStep, setActiveStep ] = useState(0);
 
-    const handleStep = (index) => {
-
+    const handleSelectStep = (index) => {
+        if(index > getSelectedStepIndex(steps)) {
+            return;
+        }
+        const newStepsList = steps.map((el, i) => {
+            if (i === index) {
+                el = {...el, completed: true};
+            }
+            return el;
+        });
+        setSteps(newStepsList);
+        onSelectStep(newStepsList, index);
     }
 
     const getSteps = () => {
-        debugger;
-        return steps.map(step => (
+        return steps.map((step, index) => (
                 <Step
                     key={step.name}
                     completed={step.completed}>
-                    <StepLabel>{step.label}<br/>{step.description}</StepLabel>
+                    <StepButton onClick={() => handleSelectStep(index)}>{step.label}<br/>{step.description}</StepButton>
                 </Step>
             ));
     };

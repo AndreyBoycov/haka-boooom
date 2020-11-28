@@ -1,57 +1,11 @@
-import React, {Component} from 'react'
+import React, { useState } from 'react'
 import './TablePage.scss'
-import icon from '../../images/icon.svg'
-import subtract from '../../images/iconGlas.svg'
-import Button from "@material-ui/core/Button";
-import SvgIcon from "@material-ui/core/SvgIcon";
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import ApplicationRoot from "../../components/AplicationRoot/ApplicationRoot";
 import Stepper from "./Stepper/StepperComponent";
-
-const hasTheme = [
-    {shortTitle: 'эксплуатация распределительных сетей',
-     solutionDescription: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
-     author: 'Константинопольский В. А.',
-     date: '02.08.2020',
-     dateLastChange: '02.08.2020',
-     views: '50',
-     reader: '52'},
-    {shortTitle: 'эксплуатация распределительных сетей',
-     solutionDescription: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
-     author: 'Константинопольский В. А.',
-     date: '02.08.2020',
-     dateLastChange: '02.08.2020',
-     views: '50',
-     reader: '52'},
-    {shortTitle: 'эксплуатация распределительных сетей',
-     solutionDescription: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
-     author: 'Константинопольский В. А.',
-     date: '02.08.2020',
-     dateLastChange: '02.08.2020',
-     views: '50',
-     reader: '52'},
-    {shortTitle: 'эксплуатация распределительных сетей',
-     solutionDescription: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
-     author: 'Константинопольский В. А.',
-     date: '02.08.2020',
-     dateLastChange: '02.08.2020',
-     views: '50',
-     reader: '52'},
-    {shortTitle: 'эксплуатация распределительных сетей',
-     solutionDescription: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
-     author: 'Константинопольский В. А.',
-     date: '02.08.2020',
-     dateLastChange: '02.08.2020',
-     views: '50',
-     reader: '52'},
-    {shortTitle: 'эксплуатация распределительных сетей',
-     solutionDescription: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
-     author: 'Константинопольский В. А.',
-     date: '02.08.2020',
-     dateLastChange: '02.08.2020',
-     views: '50',
-     reader: '52'},
-    ];
+import CreateRequestPage1 from "./CreateRequestPage1/CreateRequestPage1";
+import CreateRequestPage2 from "./CreateRequestPage2/CreateRequestPage2";
+import {Button} from "@material-ui/core";
+import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import SvgIcon from "@material-ui/core/SvgIcon";
 
 const STEPS_LIST = [
     {name: 'step_1', completed: true, label: '1 этап', description: 'Краткое название'},
@@ -62,12 +16,37 @@ const STEPS_LIST = [
 ];
 
 const TablePage = props => {
+    const [stepsOfCreateRequest, setStepsOfCreateRequest] = useState(STEPS_LIST);
+    const [activeStep, setActiveStep] = useState(0);
+    const [requestModel, setRequestModel] = useState({});
 
-    const [age, setAge] = React.useState('');
+    const handlerSelectStep = (stepsOfCreateRequest, selectStepIndex) => {
+        setStepsOfCreateRequest(stepsOfCreateRequest);
+        setActiveStep(selectStepIndex);
+    }
 
-    const handleChange = (event) => {
-        setAge(event.target.value);
+    const setNextStep = () => {
+        setActiveStep((prevValue) => prevValue + 1);
+    }
+
+    const getStepRender = (index) => {
+        const steps = [
+            <CreateRequestPage1 onNextStep={setNextStep}/>,
+            <CreateRequestPage2
+                requestDescription={
+                    {
+                        descriptionDefect: requestModel?.descriptionDefect,
+                        descriptionDecide: requestModel?.descriptionDecide,
+                        positiveEffect: requestModel?.positiveEffect
+                    }
+                }
+            />
+        ];
+        return steps.find((el, i) => {
+            return index === i;
+        });
     };
+
     // render() {
         return(
             <div className='head-body'>
@@ -76,74 +55,27 @@ const TablePage = props => {
                         Рационализаторское предложение
                     </div>
                     <div className='stages'>
-                        <Stepper stepsList={STEPS_LIST}/>
+                        <Stepper stepsList={stepsOfCreateRequest} onSelectStep={handlerSelectStep}/>
                     </div>
                 </div>
-                <div className='fields'>
-                    <span>Категория</span>
-                    <select>
-                        <option>asd</option>
-                        <option>a</option>
-                    </select>
-                    <span>Предложение</span>
-                    <input type="text"/>
-                    <span>Описание</span>
-                    <textarea ></textarea>
+                <div>
+
                 </div>
-                <div className='has-theme'>
-                    {hasTheme.map(item => {
-                        return (
-                            ApplicationRoot(item)
-                            // <ApplicationRoot/>
-                            // <div className='has-result'>
-                            //     <div className='description-result'>
-                            //         <span className='result-header'>{item.theme}</span>
-                            //         <span className='theme-table-page'>Тема</span>
-                            //         <div className='description-table-page'>
-                            //             {item.description}
-                            //         </div>
-                            //         <div>
-                            //             <span className='header-text-table-page'>Автор</span>
-                            //             <span className='author-table-page'>
-                            //                 {item.author}
-                            //             </span>
-                            //         </div>
-                            //         <div className='dates-grid-table'>
-                            //             <span className='header-text-table-page'>Дата размещения</span>
-                            //             <span className='dates-table-page'>
-                            //                 {item.dateStart}
-                            //             </span>
-                            //             <span className='header-text-table-page'>Дата последнего изменения</span>
-                            //             <span className='dates-table-page'>
-                            //                 {item.dateLastChange}
-                            //             </span>
-                            //         </div>
-                            //     </div>
-                            //     <div style={{display: 'grid', gridTemplateRows: '2rem 2rem auto'}}>
-                            //         <div className='icons-table-page'>
-                            //             <span>
-                            //                 {item.views}
-                            //             </span>
-                            //             <img src={subtract} alt=";jgf"/>
-                            //         </div>
-                            //         <div className='icons-table-page'>
-                            //             <span>
-                            //                 {item.reader}
-                            //             </span>
-                            //             <img src={icon} alt=""/>
-                            //         </div>
-                            //         <div style={{alignSelf: 'end', paddingBottom: '20px'}}>
-                            //             <a className='href-result-table-page' href="">Перейти</a>
-                            //         </div>
-                            //     </div>
-                            // </div>
-                        )
-                    })}
+                <div>
+                    { getStepRender(activeStep) }
                 </div>
-                <Button className='button-next-table-page'>
-                    Далее
-                    <SvgIcon component={ArrowForwardIcon}/>
-                </Button>
+
+                <div className="service_panel">
+                    {activeStep > 0 && <Button color="primary" variant="outlined">Сохранить</Button>}
+                    <Button
+                        color="primary"
+                        variant="contained"
+                        onClick={setNextStep}
+                    >
+                        Далее
+                        <SvgIcon component={ArrowForwardIcon}/>
+                    </Button>
+                </div>
             </div>
         )
     // }
