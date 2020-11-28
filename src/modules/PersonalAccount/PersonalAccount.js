@@ -27,10 +27,18 @@ const PersonalAccount = (props) => {
                     <div>Личная информация:</div>
                     <div>
                         <div className='info-user'>
-                            <span>ФИО: </span>
-                            <span>{state.name} {state.surname} {state.patronymic}</span>
-                            <span>Должность:</span>
-                            <span>{state.name_role}</span>
+                            <span style={{color: '#007ace'}}>ФИО: </span>
+                            <span style={{background: 'linear-gradient(45deg, #ffae78, #d7d7d7)',
+                                          borderRadius: '15px',
+                                          paddingLeft: '5px'}}>
+                                {state.name} {state.surname} {state.patronymic}
+                            </span>
+                            <span style={{color: '#007ace'}}>Должность:</span>
+                            <span style={{background: 'linear-gradient(45deg, #ffae78, #d7d7d7)',
+                                          borderRadius: '15px',
+                                          paddingLeft: '5px'}}>
+                                {state.name_role}
+                            </span>
                         </div>
                     </div>
                     <div className='rac-predloj'>
