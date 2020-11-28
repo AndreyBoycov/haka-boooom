@@ -1,11 +1,13 @@
 import React, {Component} from "react";
 import "./PersonalAccount.scss"
-import {useUserData} from "../../services/personalAccount.service";
+import {useGetDataRP, useUserData} from "../../services/personalAccount.service";
+import ApplicationRoot from "../../components/AplicationRoot/ApplicationRoot";
 
 
 const PersonalAccount = (props) => {
 
-    const { usersList, isLoading } = useUserData({id: '1'});
+    const { usersList, isLoading } = useUserData({id: '5'});
+    const { rpList, isLoading2 } = useGetDataRP({id: '5'});
 
     const state = {
         name: usersList['name'],
@@ -13,10 +15,10 @@ const PersonalAccount = (props) => {
         patronymic: usersList['patronymic'],
         id: usersList['id'],
         name_role: usersList['name_role'],
-        offers: ['запупка новых фрезерных станков', 'система поощрений'],
+        offers: rpList,
         confirmations: ['подтверждение а', 'подтверждение б']
     };
-    console.log(usersList, 'kek')
+    console.log(rpList, 'kek');
 
     // render() {
         return (
@@ -35,10 +37,15 @@ const PersonalAccount = (props) => {
                         <div className='header'>Список ваших рац. предложений: </div>
                         <div className='body'>
                             {state.offers.map(offer => {
+                                debugger;
+                                let a = state.surname.slice(0, 1);
+                                let b = state.patronymic.slice(0, 1);
+                                offer['author'] = state.name + state.surname[0] + '. ' + state.patronymic[0];
+                                offer['views'] = '50';
+                                offer['reader'] = '52';
+                                offer['dateLastChange'] = '02.08.2020';
                                 return (
-                                    <div>
-                                        {offer}
-                                    </div>
+                                    ApplicationRoot(offer)
                                 )
                             })}
                         </div>

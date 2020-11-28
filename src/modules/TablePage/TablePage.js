@@ -5,47 +5,48 @@ import subtract from '../../images/iconGlas.svg'
 import Button from "@material-ui/core/Button";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import ApplicationRoot from "../../components/AplicationRoot/ApplicationRoot";
 
 const hasTheme = [
-    {theme: 'эксплуатация распределительных сетей',
-     description: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
+    {shortTitle: 'эксплуатация распределительных сетей',
+     solutionDescription: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
      author: 'Константинопольский В. А.',
-     dateStart: '02.08.2020',
+     date: '02.08.2020',
      dateLastChange: '02.08.2020',
      views: '50',
      reader: '52'},
-    {theme: 'эксплуатация распределительных сетей',
-     description: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
+    {shortTitle: 'эксплуатация распределительных сетей',
+     solutionDescription: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
      author: 'Константинопольский В. А.',
-     dateStart: '02.08.2020',
+     date: '02.08.2020',
      dateLastChange: '02.08.2020',
      views: '50',
      reader: '52'},
-    {theme: 'эксплуатация распределительных сетей',
-     description: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
+    {shortTitle: 'эксплуатация распределительных сетей',
+     solutionDescription: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
      author: 'Константинопольский В. А.',
-     dateStart: '02.08.2020',
+     date: '02.08.2020',
      dateLastChange: '02.08.2020',
      views: '50',
      reader: '52'},
-    {theme: 'эксплуатация распределительных сетей',
-     description: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
+    {shortTitle: 'эксплуатация распределительных сетей',
+     solutionDescription: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
      author: 'Константинопольский В. А.',
-     dateStart: '02.08.2020',
+     date: '02.08.2020',
      dateLastChange: '02.08.2020',
      views: '50',
      reader: '52'},
-    {theme: 'эксплуатация распределительных сетей',
-     description: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
+    {shortTitle: 'эксплуатация распределительных сетей',
+     solutionDescription: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
      author: 'Константинопольский В. А.',
-     dateStart: '02.08.2020',
+     date: '02.08.2020',
      dateLastChange: '02.08.2020',
      views: '50',
      reader: '52'},
-    {theme: 'эксплуатация распределительных сетей',
-     description: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
+    {shortTitle: 'эксплуатация распределительных сетей',
+     solutionDescription: 'Должна обеспечиваться возможность поиска тем по основным атрибутам. Внутри тематического направления выводится список вопросов с возможностью сортировки созданных тем по основным атрибутам (Ф.И.О. автора, дата размещения, последнее',
      author: 'Константинопольский В. А.',
-     dateStart: '02.08.2020',
+     date: '02.08.2020',
      dateLastChange: '02.08.2020',
      views: '50',
      reader: '52'},
@@ -89,48 +90,50 @@ const TablePage = props => {
                 <div className='has-theme'>
                     {hasTheme.map(item => {
                         return (
-                            <div className='has-result'>
-                                <div className='description-result'>
-                                    <span className='result-header'>{item.theme}</span>
-                                    <span className='theme-table-page'>Тема</span>
-                                    <div className='description-table-page'>
-                                        {item.description}
-                                    </div>
-                                    <div>
-                                        <span className='header-text-table-page'>Автор</span>
-                                        <span className='author-table-page'>
-                                            {item.author}
-                                        </span>
-                                    </div>
-                                    <div className='dates-grid-table'>
-                                        <span className='header-text-table-page'>Дата размещения</span>
-                                        <span className='dates-table-page'>
-                                            {item.dateStart}
-                                        </span>
-                                        <span className='header-text-table-page'>Дата последнего изменения</span>
-                                        <span className='dates-table-page'>
-                                            {item.dateLastChange}
-                                        </span>
-                                    </div>
-                                </div>
-                                <div style={{display: 'grid', gridTemplateRows: '2rem 2rem auto'}}>
-                                    <div className='icons-table-page'>
-                                        <span>
-                                            {item.views}
-                                        </span>
-                                        <img src={subtract} alt=";jgf"/>
-                                    </div>
-                                    <div className='icons-table-page'>
-                                        <span>
-                                            {item.reader}
-                                        </span>
-                                        <img src={icon} alt=""/>
-                                    </div>
-                                    <div style={{alignSelf: 'end', paddingBottom: '20px'}}>
-                                        <a className='href-result-table-page' href="">Перейти</a>
-                                    </div>
-                                </div>
-                            </div>
+                            ApplicationRoot(item)
+                            // <ApplicationRoot/>
+                            // <div className='has-result'>
+                            //     <div className='description-result'>
+                            //         <span className='result-header'>{item.theme}</span>
+                            //         <span className='theme-table-page'>Тема</span>
+                            //         <div className='description-table-page'>
+                            //             {item.description}
+                            //         </div>
+                            //         <div>
+                            //             <span className='header-text-table-page'>Автор</span>
+                            //             <span className='author-table-page'>
+                            //                 {item.author}
+                            //             </span>
+                            //         </div>
+                            //         <div className='dates-grid-table'>
+                            //             <span className='header-text-table-page'>Дата размещения</span>
+                            //             <span className='dates-table-page'>
+                            //                 {item.dateStart}
+                            //             </span>
+                            //             <span className='header-text-table-page'>Дата последнего изменения</span>
+                            //             <span className='dates-table-page'>
+                            //                 {item.dateLastChange}
+                            //             </span>
+                            //         </div>
+                            //     </div>
+                            //     <div style={{display: 'grid', gridTemplateRows: '2rem 2rem auto'}}>
+                            //         <div className='icons-table-page'>
+                            //             <span>
+                            //                 {item.views}
+                            //             </span>
+                            //             <img src={subtract} alt=";jgf"/>
+                            //         </div>
+                            //         <div className='icons-table-page'>
+                            //             <span>
+                            //                 {item.reader}
+                            //             </span>
+                            //             <img src={icon} alt=""/>
+                            //         </div>
+                            //         <div style={{alignSelf: 'end', paddingBottom: '20px'}}>
+                            //             <a className='href-result-table-page' href="">Перейти</a>
+                            //         </div>
+                            //     </div>
+                            // </div>
                         )
                     })}
                 </div>
