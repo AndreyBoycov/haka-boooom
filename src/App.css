@@ -2,10 +2,11 @@
   display: grid;
   grid-template-rows: auto 1fr;
   text-align: center;
-  padding: 10px;
+  background: #D7D7D7;
   height: 100%;
 }
 .Content{
+  overflow: hidden;
 }
 
 .App-logo {

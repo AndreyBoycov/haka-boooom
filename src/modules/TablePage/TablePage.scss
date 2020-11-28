@@ -1,0 +1,124 @@
+.head-body{
+  padding: 1em 0 0 1em;
+  .button-next-table-page {
+    margin-right: 77rem;
+    margin-top: 1em;
+    background: #007ACE;
+    box-shadow: 0px 1px 0px rgba(22, 29, 37, 0.1), inset 0px 1px 0px rgba(255, 255, 255, 0.06);
+    border-radius: 3px;
+  }
+  .body-table-pages{
+    display: grid;
+    justify-items: start;
+    grid-gap: 1em;
+    background-color: #D7D7D7;
+  }
+  .stages{
+    display: flex;
+    padding: 0 0 0 1em;
+    align-items: center;
+    .stage{
+      padding-right: 1em;
+      color: #007ACE;
+    }
+    .line{
+      width: 18em;
+      border: 1px solid #007ACE;
+      margin-right: 1em;
+      height: 0;
+    }
+  }
+
+  .fields{
+    padding: 1em 0 0 1em;
+    display: grid;
+    grid-template-columns: 7em 30rem;
+    justify-items: baseline;
+    grid-gap: 1em;
+    span{
+      color: #4F4F4F;
+    }
+    input{
+      width: -webkit-fill-available;
+      border-radius: 4px;
+      border-color: rgba(0,122,206,0.5);
+      outline-color: #007ACE;
+    }
+    textarea{
+      width: -webkit-fill-available;
+      border-radius: 4px;
+      border-color: rgba(0,122,206,0.5);
+      outline-color: #007ACE;
+    }
+    Select{
+      width: -webkit-fill-available;
+      border-radius: 4px;
+      border-color: rgba(0,122,206,0.5);
+      outline-color: #007ACE;
+    }
+  }
+  .has-theme{
+    overflow: auto;
+    display: flex;
+    .has-result{
+      background: #FFFFFF;
+      margin: 10px;
+      box-shadow: 0px 0px 0px rgba(63, 63, 68, 0.05), 0px 1px 3px rgba(63, 63, 68, 0.15);
+      border-radius: 3px;
+      display: grid;
+      grid-template-columns: 1fr 6em;
+      .href-result-table-page{
+        color: #007ACE;
+        font-size: 14px;
+      }
+      .icons-table-page{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: center;
+        span{
+          color: #007ACE;
+          font-size: 14px;
+        }
+      }
+      .description-result{
+        justify-items: baseline;
+        padding: 15px;
+        display: grid;
+        width: 31rem;
+        .dates-grid-table{
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          justify-items: baseline;
+        }
+        .result-header{
+          color: #007ACE;
+          font-size: 12px;
+        }
+        .theme-table-page{
+          padding: 10px 0 5px 0;
+          color: #919EAB;
+          font-size: 12px;
+        }
+        .description-table-page{
+          text-align: initial;
+          padding-bottom: 20px;
+          font-size: 14px;
+          color: #000000;
+        }
+        .header-text-table-page{
+          padding-right: 5px;
+          font-size: 12px;
+          color: #919EAB;
+        }
+        .author-table-page{
+          color: #212B36;
+          font-size: 14px;
+        }
+        .dates-table-page{
+          color: rgba(33,43,54,0.9);
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}

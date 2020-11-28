@@ -14,11 +14,10 @@ function App() {
 
   return (
     <div className="App">
-        <nav className="nav">
+        {/*<nav className="nav">*/}
             <NavBar>
-
             </NavBar>
-        </nav>
+        {/*</nav>*/}
 
         <div className="Content">
             <Route path="/login" component={LoginPage} />

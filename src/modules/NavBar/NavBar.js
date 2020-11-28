@@ -21,7 +21,7 @@ const NavBar = (props) => {
             <div style={{backgroundColor: '#ffffff',
                          display: 'grid',
                          alignItems: 'center',
-                         gridTemplateColumns: 'auto 1fr 10em',
+                         gridTemplateColumns: 'auto 1fr 7em',
                          height: '6rem'}}>
                 <img src={logoRooss} alt=";jgf"/>
                 <div className='up_linear'>
