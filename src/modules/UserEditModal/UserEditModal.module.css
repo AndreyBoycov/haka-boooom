@@ -1,0 +1,30 @@
+.dialog_content{
+    display: grid;
+    margin: 0 10px;
+}
+
+.dialog_content > div {
+    width: 100%;
+    text-align: center;
+}
+
+.dialog_content .root{
+    min-width: 300px;
+}
+
+.education{
+    min-width: 100%;
+}
+
+.action_panel{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.fio_form{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.fio_form > div {
+    padding: 0 5px;
+}
