@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import SvgIcon from "@material-ui/core/SvgIcon";
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ApplicationRoot from "../../components/AplicationRoot/ApplicationRoot";
+import Stepper from "./Stepper/StepperComponent";
 
 const hasTheme = [
     {shortTitle: 'эксплуатация распределительных сетей',
@@ -52,6 +53,14 @@ const hasTheme = [
      reader: '52'},
     ];
 
+const STEPS_LIST = [
+    {name: 'step_1', completed: true, label: '1 этап', description: 'Краткое название'},
+    {name: 'step_2', completed: false, label: '2 этап', description: 'Описание'},
+    {name: 'step_3', completed: false, label: '3 этап', description: 'Затраты\\этапы'},
+    {name: 'step_4', completed: false, label: '4 этап', description: 'Соглашение'},
+    {name: 'step_5', completed: false, label: '5 этап', description: null}
+];
+
 const TablePage = props => {
 
     const [age, setAge] = React.useState('');
@@ -67,13 +76,7 @@ const TablePage = props => {
                         Рационализаторское предложение
                     </div>
                     <div className='stages'>
-                        <div className='stage'>1 этап</div>
-                        <div className='line'></div>
-                        <div className='stage'>2 этап</div>
-                        <div className='line'></div>
-                        <div className='stage'>3 этап</div>
-                        <div className='line'></div>
-                        <div className='stage'>4 этап</div>
+                        <Stepper stepsList={STEPS_LIST}/>
                     </div>
                 </div>
                 <div className='fields'>
