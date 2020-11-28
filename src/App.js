@@ -6,11 +6,15 @@ import LoginPage from "./modules/loginPage/LoginPage";
 import NavBar from "./modules/NavBar/NavBar";
 import PersonalAccount from "./modules/PersonalAccount/PersonalAccount";
 import AdminPage from "./modules/AdminPage/AdminPage";
+import Switch from "@material-ui/core/Switch";
+
+// let rout = "/login"
 
 function App() {
+
   return (
     <div className="App">
-        <nav className="nav" exact>
+        <nav className="nav">
             <NavBar>
 
             </NavBar>
