@@ -14,9 +14,9 @@ const PersonalAccount = (props) => {
         surname: usersList['surname'],
         patronymic: usersList['patronymic'],
         id: usersList['id'],
-        name_role: usersList['name_role'],
+        name_role: usersList['positionName'],
         offers: rpList,
-        confirmations: ['подтверждение а', 'подтверждение б']
+        confirmations: rpList
     };
     console.log(rpList, 'kek');
 
@@ -34,33 +34,42 @@ const PersonalAccount = (props) => {
                         </div>
                     </div>
                     <div className='rac-predloj'>
-                        <div className='header'>Список ваших рац. предложений: </div>
-                        <div className='body'>
-                            {state.offers.map(offer => {
-                                debugger;
-                                let a = state.surname.slice(0, 1);
-                                let b = state.patronymic.slice(0, 1);
-                                offer['author'] = state.name + state.surname[0] + '. ' + state.patronymic[0];
-                                offer['views'] = '50';
-                                offer['reader'] = '52';
-                                offer['dateLastChange'] = '02.08.2020';
-                                return (
-                                    ApplicationRoot(offer)
-                                )
-                            })}
+                        <div style={{display: 'grid', justifyItems: 'baseline',
+                                     borderBottomLeftRadius: '5px',
+                                     borderTopLeftRadius: '5px',
+                                     backgroundColor: 'rgba(0,0,0,0.12)',
+                                     padding: '5px'}}>
+                            <span className='header'>Список ваших рац. предложений: </span>
+                            <div className='body'>
+                                {state.offers.map(offer => {
+                                    offer['author'] = state.name + ' ' + state.surname[0] + '. ' + state.patronymic[0];
+                                    offer['views'] = '50';
+                                    offer['reader'] = '52';
+                                    offer['dateLastChange'] = '02.08.2020';
+                                    return (
+                                        ApplicationRoot(offer)
+                                    )
+                                })}
+                            </div>
+                        </div>
+                        <div style={{display: 'grid', justifyItems: 'baseline',
+                                     backgroundColor: '#919eab',
+                                     padding: '5px'}}>
+                            <span className='header'>Список рац. предложений в которых вы участвуете: </span>
+                            <div className='body'>
+                                {state.confirmations.map(confirmation => {
+                                    confirmation['author'] = state.name + ' ' + state.surname[0] + '. ' + state.patronymic[0];
+                                    confirmation['views'] = '50';
+                                    confirmation['reader'] = '52';
+                                    confirmation['dateLastChange'] = '02.08.2020';
+                                    return (
+                                        ApplicationRoot(confirmation)
+                                    )
+                                })}
+                            </div>
                         </div>
                     </div>
                     <div className='rac-predloj'>
-                        <div className='header'>Список рац. предложений в которых вы участвуете: </div>
-                        <div className='body'>
-                            {state.confirmations.map(confirmation => {
-                                return (
-                                    <div>
-                                        {confirmation}
-                                    </div>
-                                )
-                            })}
-                        </div>
                     </div>
                 </div>
             </div>

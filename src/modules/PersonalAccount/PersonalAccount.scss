@@ -11,12 +11,13 @@
 }
 .rac-predloj{
   display: grid;
+  grid-template-columns: 1fr 1fr;
   justify-items: start;
-  padding-left: 3em;
+  padding-left: 2em;
 }
 .body{
   display: grid;
   justify-items: start;
-  padding: 1em 0 0 10em;
+  padding: 1em 0 0 1em;
   grid-gap: 1em;
 }

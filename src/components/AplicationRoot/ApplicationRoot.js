@@ -1,6 +1,7 @@
 import subtract from "../../images/iconGlas.svg";
 import icon from "../../images/icon.svg";
 import React from "react";
+import './ApplicationRoot.scss'
 
 const ApplicationRoot = props => {
 debugger;
