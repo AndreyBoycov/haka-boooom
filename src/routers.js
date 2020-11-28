@@ -11,9 +11,8 @@ export const ADMIN_PANEL_PAGE_PATH = '/admin_panel';
 export const USER_EDIT_PAGE_PATH = '/user/:userId';
 
 export const ROUTERS = [
-    { path: LOGIN_PAGE_PATH, component: LoginPage},
-    { path: TABLE_PAGE_PATH, component: TablePage},
-    { path: PERSONAL_ACCOUNT_PAGE_PATH, component: PersonalAccount},
-    { path: ADMIN_PANEL_PAGE_PATH, component: AdminPage},
-    { path: USER_EDIT_PAGE_PATH, component: UserEditPage},
+    { path: TABLE_PAGE_PATH, component: TablePage },
+    { path: PERSONAL_ACCOUNT_PAGE_PATH, component: PersonalAccount },
+    { path: ADMIN_PANEL_PAGE_PATH, component: AdminPage },
+    { path: USER_EDIT_PAGE_PATH, component: UserEditPage },
 ];
