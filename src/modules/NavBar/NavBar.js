@@ -48,7 +48,7 @@ const NavBar = (props) => {
                     </div>
 
                     <div className="bottom_block">
-                        <span className='text text_20px'>Цифровое сообщество по рационализаторской деятельности</span>
+                        <span style={{width: '22rem'}} className='text text_20px'>Цифровое сообщество по рационализаторской деятельности</span>
                         <div className='menu_panel'>
                             <NavLink className="text_15px" to={TABLE_PAGE_PATH}>Добавить рац. предложение</NavLink>
                         </div>
