@@ -8,7 +8,7 @@ debugger;
     return(
         <div className='has-result'>
             <div className='description-result'>
-                <span className='result-header'>{props.theme}</span>
+                <span className='result-header'>{props.shortTitle}</span>
                 <span className='theme-table-page'>Тема</span>
                 <div className='description-table-page'>
                     {props.solutionDescription}
@@ -35,7 +35,7 @@ debugger;
                                             <span>
                                                 {props.views}
                                             </span>
-                    <img src={subtract} alt=";jgf"/>
+                    <img src={subtract} alt=""/>
                 </div>
                 <div className='icons-table-page'>
                                             <span>
