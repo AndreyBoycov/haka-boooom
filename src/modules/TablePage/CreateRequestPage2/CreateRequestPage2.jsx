@@ -18,8 +18,14 @@ const PLACEHOLDER_POSITIVE_EFFECT = 'указывается информация
     'заявлению';
 
 const CreateRequestPage2 = (props) => {
-    const { requestDescription } = props;
+    const { requestDescription, onChangeDescription } = props;
     const [ requestDescriptionStep, setRequestDescriptionStep ] = useState(requestDescription);
+
+    const handlerChangeValuesBlock = (event, key) => {
+        requestDescriptionStep[key] = event.target.value;
+        setRequestDescriptionStep(requestDescriptionStep);
+        onChangeDescription(requestDescriptionStep);
+    }
 
     return (
         <>
@@ -31,37 +37,37 @@ const CreateRequestPage2 = (props) => {
             }}/>
             <div className='content_block'>
                 <div>
-                <span>Описание действительного положения с указанием существующих недостатков:</span>
-                <TextField
-                    multiline
-                    placeholder={PLACEHOLDER_DESCRIPTION_DEFECT}
-                    value={requestDescriptionStep.description_defect}
-                    onChange={() => {}}
-                    variant="outlined"
-                />
-            </div>
+                    <span>Описание действительного положения с указанием существующих недостатков:</span>
+                    <TextField
+                        multiline
+                        placeholder={PLACEHOLDER_DESCRIPTION_DEFECT}
+                        value={requestDescriptionStep.description_defect}
+                        onChange={ev => handlerChangeValuesBlock(ev, 'description_defect')}
+                        variant="outlined"
+                    />
+                </div>
 
                 <div>
-                <span>Описание предлагаемого решения:</span>
-                <TextField
-                    multiline
-                    placeholder={PLACEHOLDER_DESCRIPTION_DECIDE}
-                    value={requestDescriptionStep.description_decide}
-                    onChange={() => {}}
-                    variant="outlined"
-                />
-            </div>
+                    <span>Описание предлагаемого решения:</span>
+                    <TextField
+                        multiline
+                        placeholder={PLACEHOLDER_DESCRIPTION_DECIDE}
+                        value={requestDescriptionStep.description_decide}
+                        onChange={ev => handlerChangeValuesBlock(ev, 'description_decide')}
+                        variant="outlined"
+                    />
+                </div>
 
                 <div>
-                <span>Ожидаемый положительный эффект от использования (технический, организационный,<br/>управленческий или иной):</span>
-                <TextField
-                    multiline
-                    placeholder={PLACEHOLDER_POSITIVE_EFFECT}
-                    value={requestDescriptionStep.positive_effect}
-                    onChange={() => {}}
-                    variant="outlined"
-                />
-            </div>
+                    <span>Ожидаемый положительный эффект от использования (технический, организационный,<br/>управленческий или иной):</span>
+                    <TextField
+                        multiline
+                        placeholder={PLACEHOLDER_POSITIVE_EFFECT}
+                        value={requestDescriptionStep.positive_effect}
+                        onChange={ev => handlerChangeValuesBlock(ev, 'positive_effect')}
+                        variant="outlined"
+                    />
+                </div>
             </div>
         </>
     );

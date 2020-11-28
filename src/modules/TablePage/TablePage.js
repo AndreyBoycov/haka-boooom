@@ -17,7 +17,7 @@ const STEPS_LIST = [
 
 const TablePage = props => {
     const [stepsOfCreateRequest, setStepsOfCreateRequest] = useState(STEPS_LIST);
-    const [activeStep, setActiveStep] = useState(0);
+    const [activeStep, setActiveStep] = useState(1);
     const [requestModel, setRequestModel] = useState({});
 
     const handlerSelectStep = (stepsOfCreateRequest, selectStepIndex) => {
@@ -43,6 +43,9 @@ const TablePage = props => {
                         descriptionDecide: requestModel?.descriptionDecide,
                         positiveEffect: requestModel?.positiveEffect
                     }
+                }
+                onChangeDescription={description =>
+                    setRequestModel({...requestModel, ...description})
                 }
             />
         ];
