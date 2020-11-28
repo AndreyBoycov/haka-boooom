@@ -5,6 +5,9 @@
   background: #D7D7D7;
   height: 100%;
 }
+.App > div{
+  padding: 0 10%;
+}
 .Content{
   overflow: hidden;
 }

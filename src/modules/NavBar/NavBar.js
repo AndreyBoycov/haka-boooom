@@ -6,6 +6,8 @@ import DirectionsWalkIcon from '@material-ui/icons/DirectionsWalk';
 import {history} from '../../_helpers/history';
 import Button from "@material-ui/core/Button";
 import './NavBar.scss'
+import {NavLink} from "react-router-dom";
+import {TABLE_PAGE_PATH} from "../../routers";
 
 // class NavBar extends Component {
 
@@ -22,26 +24,34 @@ const NavBar = (props) => {
                          display: 'grid',
                          alignItems: 'center',
                          gridTemplateColumns: 'auto 1fr 7em',
-                         height: '6rem'}}>
+                         height: '8.5rem'}}>
                 <img src={logoRooss} alt=";jgf"/>
                 <div className='up_linear'>
                     <div className='top-body'>
-                        <span className='text'>платформа для инноваций</span>
-                        <Button href={'/login'}
-                                className='out'>
-                            <SvgIcon component={DirectionsWalkIcon}/>
-                        </Button>
-                        <Button href={"/personalAccount"}
-                                className='person-button'
-                                title='Personal Account'>
-                            <SvgIcon component={AccountBoxIcon}/>
-                            Личный кабинет
-                        </Button>
+                        <span className='text'>По приморскому краю</span>
+
+                        <div className='account_panel'>
+                            {false &&
+                            <Button href={'/login'}
+                                    className='out'>
+                                <SvgIcon component={DirectionsWalkIcon}/>
+                            </Button>
+                            }
+
+                            <Button href={"/personalAccount"}
+                                    className='person-button'
+                                    title='Personal Account'>
+                                <SvgIcon component={AccountBoxIcon}/>
+                                Личный кабинет
+                            </Button>
+                        </div>
                     </div>
-                    <div>
-                    <a href="/">Home</a>
-                    <span>  </span>
-                    <a href="/table">Table</a>
+
+                    <div className="bottom_block">
+                        <span className='text text_20px'>Цифровое сообщество по рационализаторской деятельности</span>
+                        <div className='menu_panel'>
+                            <NavLink className="text_15px" to={TABLE_PAGE_PATH}>Добавить рац. предложение</NavLink>
+                        </div>
                     </div>
                 </div>
             </div>

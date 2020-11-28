@@ -5,7 +5,7 @@ import AdminPage from "./modules/AdminPage/AdminPage";
 import UserEditPage from "./modules/UserEditModal/UserEditModal";
 
 export const LOGIN_PAGE_PATH = '/login';
-export const TABLE_PAGE_PATH = '/table';
+export const TABLE_PAGE_PATH = '/create_request';
 export const PERSONAL_ACCOUNT_PAGE_PATH = '/personalAccount';
 export const ADMIN_PANEL_PAGE_PATH = '/admin_panel';
 export const USER_EDIT_PAGE_PATH = '/user/:userId';
