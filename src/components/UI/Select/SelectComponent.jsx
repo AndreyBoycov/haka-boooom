@@ -3,15 +3,15 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import {FormControl} from "@material-ui/core";
-import styles from "./SelectComponent.module.css";
 
 const SelectComponent = (props) => {
     const {
         list,
+        selectedValue,
         onSelect,
         label=''
     } = props;
-    const [ selectedPosition, setSelectedPosition ] = useState('');
+    const [ selectedPosition, setSelectedPosition ] = useState(selectedValue);
 
     const selectPosition = (_, selectPosition) => {
         setSelectedPosition(selectPosition.props.value);
@@ -25,11 +25,11 @@ const SelectComponent = (props) => {
     };
 
     return (
-        <FormControl className={styles.select}>
+        <FormControl style={{minWidth: '100%'}}>
             <InputLabel htmlFor="label">{label}</InputLabel>
             <Select
                 autoWidth={true}
-                value={selectedPosition.name}
+                value={selectedPosition}
                 onChange={selectPosition}
             >
                 <MenuItem value={({})}>

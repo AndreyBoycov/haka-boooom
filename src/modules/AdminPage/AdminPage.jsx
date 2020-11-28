@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import TableComponent from "../../components/UI/Table/TableComponent";
-import {useUsersList} from "../../services/user.service";
+import {deactivateUser, getUsersList, useUsersList} from "../../services/user.service";
 import {getFormattedUserList} from "./utils/users.mapper";
 import UserEditModalContainer from "../UserEditModal/UserEditModalContainer";
 
@@ -18,7 +18,14 @@ const invisibleKeysList = ['id'];
 
 const AdminPage = (props) => {
     const [ userIdEdit, setUserIdEdit ] = useState(null);
-    const { usersList, isLoading } = useUsersList({});
+    const [ usersList, setUsersList ] = useState( []);
+
+    useEffect(() => {
+        getUsersList({}).then(users => {
+            setUsersList(users)
+        });
+    }, [])
+
 
     const activeUserEditModal = (userId) => {
         setUserIdEdit(userId);
@@ -26,7 +33,18 @@ const AdminPage = (props) => {
 
     const handlerCloseEditUser = () => {
         setUserIdEdit(null);
+        getUsersList({}).then(users => {
+            setUsersList(users)
+        });
     };
+
+    const activateUserCallback = (row, indexRow, status) => {
+        deactivateUser(+row.id, status)
+            .then(res => {
+                return getUsersList({});
+            })
+            .then(users => setUsersList(users));
+    }
 
     return (
         <>
@@ -37,7 +55,7 @@ const AdminPage = (props) => {
             <TableComponent
                 headerList={headerList}
                 invisibleKeysList={invisibleKeysList}
-                dataList={getFormattedUserList(usersList, activeUserEditModal)}
+                dataList={getFormattedUserList(usersList, activeUserEditModal, activateUserCallback)}
                 count={usersList.length}
             />
         </>

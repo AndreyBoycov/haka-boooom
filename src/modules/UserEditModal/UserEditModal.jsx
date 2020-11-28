@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
@@ -8,25 +8,27 @@ import TextField from "@material-ui/core/TextField";
 import SelectComponent from "../../components/UI/Select/SelectComponent";
 import classes from "./UserEditModal.module.css";
 
+type pairType = {
+    id: number;
+    name: string;
+};
+
 type userInfoType = {
     firstName: string;
     secondName: string;
     surName: string;
-    education: string;
-    structuralUnits: {
-        id: number;
-        name: string;
-    };
-    position: {
-        id: number;
-        name: string;
-    }
+    education: pairType;
+    structuralUnits: pairType;
+    position: pairType;
+    role: pairType;
 };
 
 const getCopyUserInfo = (userInfo: userInfoType) => {
     const structuralUnits = {...userInfo.structuralUnits};
     const position = {...userInfo.position};
-    return {...userInfo, structuralUnits, position};
+    const role = {...userInfo.role};
+    const education = {...userInfo.education};
+    return {...userInfo, structuralUnits, position, role, education};
 }
 
 const UserEditModal = (props) => {
@@ -35,15 +37,17 @@ const UserEditModal = (props) => {
         onCloseModal,
         positionsList,
         structuralUnitsList,
-        onUpdate
+        educationList,
+        roleList,
+        onUpdate,
+        showMode = true
     } = props;
-    const [ isShowMode, setShowMode ] = useState(true);
-    const userEdit = getCopyUserInfo(userInfo);
-
+    const [ isShowMode, setShowMode ] = useState(showMode);
+    const [ userEdit, setUserEdit ] = useState(() => getCopyUserInfo(userInfo));
 
     const handleOnClose = (event) => {
         setShowMode(false);
-        onCloseModal(false);
+        onCloseModal({isUpdate: false});
     };
 
     const handleOnUpdate = (event) => {
@@ -51,13 +55,12 @@ const UserEditModal = (props) => {
         onUpdate(userEdit);
     };
 
-    const setPosition = (position) => {
-        userInfo.position = position;
-    };
-
-    const setStructuralUnit = (structuralUnit) => {
-        userInfo.structuralUnits = structuralUnit;
-    };
+    const getSelectedPosition = (selectList, selectedPosition) => {
+        const selected =  selectList.find((el) => {
+            return el.id === selectedPosition?.id;
+        });
+        return selected || {id: null, name: ''};
+    }
 
     return (
         <Dialog
@@ -70,27 +73,62 @@ const UserEditModal = (props) => {
                 <DialogContentText id="alert-dialog-description">
                     <div className={classes.dialog_content}>
                         <div className={classes.fio_form}>
-                            <TextField id="surname" label="Фамилия" value={userEdit.surName}/>
-                            <TextField id="name" label="Имя" value={userEdit.firstName}/>
-                            <TextField id="lastName" label="Отчество" value={userEdit.secondName}/>
+                            <TextField
+                                id="surname"
+                                label="Фамилия"
+                                value={userEdit.surName}
+                                onChange={event => setUserEdit({...userEdit, surName: event.target.value})}
+                            />
+                            <TextField
+                                id="name"
+                                label="Имя"
+                                value={userEdit.firstName}
+                                onChange={event => setUserEdit({...userEdit, firstName: event.target.value})}
+                            />
+                            <TextField
+                                id="lastName"
+                                label="Отчество"
+                                value={userEdit.secondName}
+                                onChange={event => setUserEdit({...userEdit, secondName: event.target.value})}
+                            />
                         </div>
 
                         <div>
-                            <TextField id="education" label="Образование" value={userEdit.education}/>
+                            <SelectComponent
+                                list={educationList}
+                                selectedValue={getSelectedPosition(educationList, userEdit.education)}
+                                label="Образование"
+                                onSelect={education => setUserEdit({...userEdit, education})}/>
                         </div>
 
                         <div>
-                            <SelectComponent list={positionsList} label="Должность" onSelect={setPosition}/>
+                            <SelectComponent
+                                list={positionsList}
+                                selectedValue={getSelectedPosition(positionsList, userEdit.position)}
+                                label="Должность"
+                                onSelect={position => setUserEdit({...userEdit, position})}/>
                         </div>
 
                         <div>
-                            <SelectComponent list={structuralUnitsList} label="Подразделение" onSelect={setStructuralUnit}/>
+                            <SelectComponent
+                                list={structuralUnitsList}
+                                selectedValue={getSelectedPosition(structuralUnitsList, userEdit.structuralUnits)}
+                                label="Подразделение"
+                                onSelect={structuralUnit => setUserEdit({...userEdit, structuralUnit})}/>
+                        </div>
+
+                        <div>
+                            <SelectComponent
+                                list={roleList}
+                                selectedValue={getSelectedPosition(roleList, userEdit.role)}
+                                label="Группа прав"
+                                onSelect={role => setUserEdit({...userEdit, role})}/>
                         </div>
                     </div>
                 </DialogContentText>
             </DialogContent>
 
-            <DialogActions>
+            <DialogActions className={classes.action_panel} style={{display: 'grid'}}>
                 <Button onClick={handleOnUpdate} color="primary">
                     Сохранить
                 </Button>
