@@ -54,7 +54,9 @@ const TablePage = props => {
     }
 
     const setNextStep = () => {
-        setActiveStep(activeStep + 1);
+        stepsOfCreateRequest[activeStep + 1].completed = true;
+        setStepsOfCreateRequest(stepsOfCreateRequest);
+        setActiveStep(prevState => prevState + 1);
     }
 
     const getStepRender = (index) => {

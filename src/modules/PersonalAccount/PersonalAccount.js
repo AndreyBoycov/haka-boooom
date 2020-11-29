@@ -61,7 +61,7 @@ const PersonalAccount = (props) => {
                                 </Button>
                             </div>
                             <div>
-                                <Button onClick={() => getRequestLinkForDownload(rp.id, 'docx')}>
+                                <Button onClick={() => getRequestLinkForDownload(rp.id, 'pdf')}>
                                     <PictureAsPdf/>
                                 </Button>
                                 <Button onClick={() => getRequestLinkForDownload(rp.id, 'docx')}>
