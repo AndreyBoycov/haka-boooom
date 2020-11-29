@@ -22,20 +22,22 @@ const CreateRequestPage3 = (props) => {
 
     const changeCostItemValue = (event, index, kye) => {
         dataCostItems[index][kye] = event.target.value;
+        dataCostItems[index].p_p = index - 1;
         onChangeTables({dataCostItems, dataStage})
     };
 
     const changeStageValue = (event, index, kye) => {
         dataStage[index][kye] = event.target.value;
+        dataStage[index].p_p = index - 1;
         onChangeTables({dataCostItems, dataStage})
     };
 
     const addCostItems = () => {
-        setDataCostItems((prevValue) => [...prevValue, {no: '', nameStage: '', termDays: ''}]);
+        setDataCostItems((prevValue) => [...prevValue, {p_p: '', nameStage: '', days: ''}]);
         onChangeTables({dataCostItems, dataStage})
     };
     const addStage = () => {
-        setDataStage((prevValue) => [...prevValue, {no: '', costItems: '', sum: ''}]);
+        setDataStage((prevValue) => [...prevValue, {p_p: '', costItems: '', sum: ''}]);
         onChangeTables({dataCostItems, dataStage})
     };
 

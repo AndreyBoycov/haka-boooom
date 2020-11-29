@@ -1,0 +1,13 @@
+.text-sorra {
+  outline: none;
+  border: none;
+  background: none;
+  display: flex;
+  width: fit-content;
+  cursor: pointer;
+  align-items: center;
+  color: #007ACE;
+  .sorra {
+    font-size: 25px;
+  }
+}
