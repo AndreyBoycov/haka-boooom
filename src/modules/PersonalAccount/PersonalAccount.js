@@ -1,87 +1,120 @@
-import React, {Component} from "react";
-import "./PersonalAccount.scss"
+import React, {useState} from "react";
 import {useGetDataRP, useUserData} from "../../services/personalAccount.service";
-import ApplicationRoot from "../../components/AplicationRoot/ApplicationRoot";
+import {Button} from "@material-ui/core";
+import {KeyboardArrowDown, KeyboardArrowUp, PictureAsPdf, Receipt} from "@material-ui/icons";
+import "./PersonalAccount.scss"
+import SignersList from "./components/SignersList/SignersList";
+import {getSignersListByRequestId} from "../../services/signers.service";
+import {getLinkForDownloadDocument} from "../../services/document.service";
 
 
 const PersonalAccount = (props) => {
-
+    const [activeIndex, setActiveIndex] = useState(null);
+    const [signersList, setSignersList] = useState(null);
+    const {rpList, isLoading2} = useGetDataRP({id: '5'});
     const { usersList, isLoading } = useUserData({id: '5'});
-    const { rpList, isLoading2 } = useGetDataRP({id: '5'});
 
-    const state = {
-        name: usersList['name'],
-        surname: usersList['surname'],
-        patronymic: usersList['patronymic'],
-        id: usersList['id'],
-        name_role: usersList['positionName'],
-        offers: rpList,
-        confirmations: rpList
+    const toggleButton = (index) => {
+        if (index === null) {
+            setActiveIndex(null);
+            setSignersList([]);
+            return;
+        }
+        getSignersListByRequestId(rpList[index].id).then(res => {
+            setSignersList(res);
+            setActiveIndex(index);
+        });
+    }
+
+    const startDownloadFile = (linkStr) => {
+        var link = document.createElement('a');
+        link.setAttribute('href',linkStr);
+        link.setAttribute('download','download');
+        link.click();
     };
-    console.log(rpList, 'kek');
 
-    // render() {
-        return (
-            <div style={{backgroundColor: '#D7D7D7'}} className='bodyes'>
-                <div style={{padding: '1em 0 0 0'}}>
-                    <div>Личная информация:</div>
+    const getRequestLinkForDownload = (requestId, format) => {
+        getLinkForDownloadDocument(requestId, format).then(res => {
+            startDownloadFile(res);
+        });
+    };
+
+
+    const renderRequest = () => {
+        return rpList.map((rp, index) => {
+            return (
+                <>
+                    <div className='request_container white_list'>
+                        <span>{rp.shortTitle}</span>
+                        <div className="request_sub_container">
+                            <span className="label">Тема</span>
+                            <div>
+                                <span>{rp.solutionDescription}</span>
+                                <Button className="simple_text"
+                                    color="primary"
+                                    onClick={() => toggleButton(activeIndex === null ? index : null)}>
+                                    На согласовании
+                                    {activeIndex === index ?
+                                        <KeyboardArrowUp/> :
+                                        <KeyboardArrowDown/>
+                                    }
+                                </Button>
+                            </div>
+                            <div>
+                                <Button onClick={() => getRequestLinkForDownload(rp.id, 'docx')}>
+                                    <PictureAsPdf/>
+                                </Button>
+                                <Button onClick={() => getRequestLinkForDownload(rp.id, 'docx')}>
+                                    <Receipt/>
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+
+                    { activeIndex === index &&
+                        <div style={{display: 'grid', gridTemplateColumns: '1fr 10fr'}}>
+                            <div>
+                                <div className='footnote'></div>
+                            </div>
+                            <SignersList signersList={signersList}/>
+                        </div>
+                    }
+                </>
+            );
+        });
+    };
+    return (
+        <div className='bodyes'>
+            <h2 style={{textAlign: 'left', padding: '0 30px'}}>Личный кабинет</h2>
+
+            {usersList &&
+                <div className="info_container">
+                    <div style={{textAlign: 'left'}}>Личная информация:</div>
                     <div>
                         <div className='info-user'>
-                            <span style={{color: '#007ace'}}>ФИО: </span>
-                            <span style={{background: 'linear-gradient(45deg, #ffae78, #d7d7d7)',
-                                          borderRadius: '15px',
-                                          paddingLeft: '5px'}}>
-                                {state.name} {state.surname} {state.patronymic}
-                            </span>
-                            <span style={{color: '#007ace'}}>Должность:</span>
-                            <span style={{background: 'linear-gradient(45deg, #ffae78, #d7d7d7)',
-                                          borderRadius: '15px',
-                                          paddingLeft: '5px'}}>
-                                {state.name_role}
-                            </span>
-                        </div>
-                    </div>
-                    <div className='rac-predloj'>
-                        <div style={{display: 'grid', justifyItems: 'baseline',
-                                     borderBottomLeftRadius: '5px',
-                                     borderTopLeftRadius: '5px',
-                                     backgroundColor: 'rgba(0,0,0,0.12)',
-                                     padding: '5px'}}>
-                            <span className='header'>Список ваших рац. предложений: </span>
-                            <div className='body'>
-                                {state.offers.map(offer => {
-                                    offer['author'] = state.name + ' ' + state.surname[0] + '. ' + state.patronymic[0];
-                                    offer['views'] = '50';
-                                    offer['reader'] = '52';
-                                    offer['dateLastChange'] = '02.08.2020';
-                                    return (
-                                        ApplicationRoot(offer)
-                                    )
-                                })}
+                            <div>
+                                <div>ФИО: </div>
+                                <div>{usersList.name} {usersList.surname} {usersList.patronymic}</div>
+                            </div>
+
+                            <div>
+                                <div>Должность: </div>
+                                <div>{usersList.positionName}</div>
+                            </div>
+
+                            <div>
+                                <div>Организация: </div>
+                                <div>{usersList.structuralUnitsName}</div>
                             </div>
                         </div>
-                        <div style={{display: 'grid', justifyItems: 'baseline',
-                                     backgroundColor: '#919eab',
-                                     padding: '5px'}}>
-                            <span className='header'>Список рац. предложений в которых вы участвуете: </span>
-                            <div className='body'>
-                                {state.confirmations.map(confirmation => {
-                                    confirmation['author'] = state.name + ' ' + state.surname[0] + '. ' + state.patronymic[0];
-                                    confirmation['views'] = '50';
-                                    confirmation['reader'] = '52';
-                                    confirmation['dateLastChange'] = '02.08.2020';
-                                    return (
-                                        ApplicationRoot(confirmation)
-                                    )
-                                })}
-                            </div>
-                        </div>
-                    </div>
-                    <div className='rac-predloj'>
                     </div>
                 </div>
+            }
+
+            <div className="requests_list">
+                {renderRequest()}
             </div>
-        )
-    // }
+        </div>
+    )
 }
 export default PersonalAccount

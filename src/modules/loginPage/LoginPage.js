@@ -110,7 +110,6 @@ class LoginPage extends Component {
     }
 
     onChangeHandler = (event, controlName) => {
-        console.log(`${controlName}: `, event.target.value);
 
         const formControls = {...this.state.formControls};
         const controls = {...formControls[controlName]};
@@ -155,7 +154,6 @@ class LoginPage extends Component {
     }
 
     render() {
-        console.log(this.state.isRedirect);
         return (
             <div>
                 {this.state.isRedirect && <Redirect to="/personalAccount" />}

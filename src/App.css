@@ -2,7 +2,7 @@
   display: grid;
   grid-template-rows: auto 1fr;
   text-align: center;
-  background: #D7D7D7;
+  background: linear-gradient(-213deg, #b4cff7, transparent);
   min-height: 100%;
 }
 .App > div{

@@ -107,7 +107,6 @@ export const useGetEducationList = () => {
 };
 
 export const updateUserInfo = async (userInfo) => {
-    console.log(userInfo);
     const { response } = await http({
         url: `/userLk/updUserInfo/${userInfo.id}`,
         method: 'POST',
