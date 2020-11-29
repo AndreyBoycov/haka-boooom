@@ -18,31 +18,26 @@ const PLACEHOLDER_POSITIVE_EFFECT = 'указывается информация
     'заявлению';
 
 const CreateRequestPage2 = (props) => {
-    const { requestDescription, onChangeDescription } = props;
-    const [ requestDescriptionStep, setRequestDescriptionStep ] = useState(requestDescription);
+    const { onChangeDescription, inStageOne } = props;
+    const [ requestModel, setRequestDescriptionStep ] = useState(props.requestModel);
 
     const handlerChangeValuesBlock = (event, key) => {
-        requestDescriptionStep[key] = event.target.value;
-        setRequestDescriptionStep(requestDescriptionStep);
-        onChangeDescription(requestDescriptionStep);
+        requestModel[key] = event.target.value;
+        setRequestDescriptionStep(requestModel);
+        onChangeDescription(requestModel);
     }
 
     return (
         <>
-            <RequestShortInfo shortInfoProp={{
-                category: requestDescriptionStep?.category,
-                theme: requestDescriptionStep?.theme,
-                shortName: requestDescriptionStep?.shortName,
-                description: requestDescriptionStep?.description
-            }}/>
+            <RequestShortInfo shortInfoProp={inStageOne}/>
             <div className='content_block'>
                 <div>
                     <span>Описание действительного положения с указанием существующих недостатков:</span>
                     <TextField
                         multiline
                         placeholder={PLACEHOLDER_DESCRIPTION_DEFECT}
-                        value={requestDescriptionStep.description_defect}
-                        onChange={ev => handlerChangeValuesBlock(ev, 'description_defect')}
+                        value={requestModel.descriptionDefect}
+                        onChange={ev => handlerChangeValuesBlock(ev, 'descriptionDefect')}
                         variant="outlined"
                     />
                 </div>
@@ -52,8 +47,8 @@ const CreateRequestPage2 = (props) => {
                     <TextField
                         multiline
                         placeholder={PLACEHOLDER_DESCRIPTION_DECIDE}
-                        value={requestDescriptionStep.description_decide}
-                        onChange={ev => handlerChangeValuesBlock(ev, 'description_decide')}
+                        value={requestModel.descriptionDecide}
+                        onChange={ev => handlerChangeValuesBlock(ev, 'descriptionDecide')}
                         variant="outlined"
                     />
                 </div>
@@ -63,8 +58,8 @@ const CreateRequestPage2 = (props) => {
                     <TextField
                         multiline
                         placeholder={PLACEHOLDER_POSITIVE_EFFECT}
-                        value={requestDescriptionStep.positive_effect}
-                        onChange={ev => handlerChangeValuesBlock(ev, 'positive_effect')}
+                        value={requestModel.positiveEffect}
+                        onChange={ev => handlerChangeValuesBlock(ev, 'positiveEffect')}
                         variant="outlined"
                     />
                 </div>

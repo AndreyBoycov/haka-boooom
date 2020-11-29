@@ -1,5 +1,7 @@
 .short_info_block{
   display: grid;
+  grid-template-columns: 12em 1fr;
+  grid-gap: 0.5em;
   justify-content: flex-start;
   justify-items: baseline;
   margin: 0 2rem;

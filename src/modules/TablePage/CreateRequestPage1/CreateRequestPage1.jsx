@@ -50,19 +50,36 @@ const hasTheme = [
 ];
 
 const CreateRequestPage1 = (props) => {
-    const { onNextStep } = props;
+    const {changeStageOne} = props;
+
+    const [category, setCategory] = React.useState(props.props.category);
+    const [description, setDescription] = React.useState(props.props.description);
+    const [suggestion, setSuggestion] = React.useState(props.props.suggestion);
+
+    const changeCategory = (event) => { setCategory(event.target.value); changeStageOne({category, description, suggestion})};
+    const changeSuggestion = (event) => { setSuggestion(event.target.value); changeStageOne({category, description, suggestion}) };
+    const changeDescription = (event) => { setDescription(event.target.value); changeStageOne({category, description, suggestion}) };
+
     return (
         <div>
             <div className='fields'>
                 <span>Категория</span>
-                <select>
-                    <option>asd</option>
-                    <option>a</option>
+                <select value={category} onChange={event => changeCategory(event)}>
+                    <option value='Электрика'>Электрика</option>
+                    <option value='Строительстфо'>Строительстфо</option>
+                    <option value='Фрезеровка'>Фрезеровка</option>
+                    <option value='Качество сна'>Качество сна</option>
                 </select>
                 <span>Предложение</span>
-                <input type="text"/>
+                <input type="text"
+                       value={suggestion}
+                       onChange={event => changeSuggestion(event)}
+                />
                 <span>Описание</span>
-                <textarea ></textarea>
+                <textarea value={description}
+                          onChange={event => changeDescription(event)}>
+
+                </textarea>
             </div>
             <div className='has-theme'>
                 {hasTheme.map(item => {

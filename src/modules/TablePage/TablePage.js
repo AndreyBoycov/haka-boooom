@@ -3,9 +3,12 @@ import './TablePage.scss'
 import Stepper from "./Stepper/StepperComponent";
 import CreateRequestPage1 from "./CreateRequestPage1/CreateRequestPage1";
 import CreateRequestPage2 from "./CreateRequestPage2/CreateRequestPage2";
+import CreateRequestPage3 from "./CreateRequestPage3/CreateRequestPage3";
 import {Button} from "@material-ui/core";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import SvgIcon from "@material-ui/core/SvgIcon";
+import {addApplication} from "../../services/applications.service";
+import CreateRequestPage4 from "./CreateRequestPage4/CreateRequestPage4";
 
 const STEPS_LIST = [
     {name: 'step_1', completed: true, label: '1 этап', description: 'Краткое название'},
@@ -15,10 +18,35 @@ const STEPS_LIST = [
     {name: 'step_5', completed: false, label: '5 этап', description: null}
 ];
 
+// const dataSave = {
+//     category:'',
+//     suggestion:'',
+//     description:'',
+//     shortTitle: '',
+//     userID: 5,
+//     existingDisadvantages: '',
+//     solutionDescription: '',
+//     isEconomy: 1,
+//     expectedPositiveEffect: '',
+//     users: [{userID: 5,
+//              percent: 50},
+//             {userID: 5,
+//              percent: 50}],
+//     expenditures: [{costItem: '',
+//                     sum: '',
+//                     p_p: 1}],
+//     termsForImplementation: [{stageName: '',
+//                               days: '',
+//                               p_p: ''}]
+//     }
+
 const TablePage = props => {
     const [stepsOfCreateRequest, setStepsOfCreateRequest] = useState(STEPS_LIST);
-    const [activeStep, setActiveStep] = useState(1);
-    const [requestModel, setRequestModel] = useState({});
+    const [activeStep, setActiveStep] = useState(0);
+    const [stageOne, setStageOne] = useState({category:'', suggestion:'', description:''});
+    const [stageFour, setStageFour] = useState([{userID: '', percent: ''}]);
+    const [requestModel, setRequestModel] = useState({descriptionDefect: '', descriptionDecide: '', positiveEffect: ''});
+    const [tablesSaved, setTablesSaved] = useState({dataCostItems: [], dataStage: []});
 
     const handlerSelectStep = (stepsOfCreateRequest, selectStepIndex) => {
         setStepsOfCreateRequest(stepsOfCreateRequest);
@@ -26,32 +54,55 @@ const TablePage = props => {
     }
 
     const setNextStep = () => {
-        setActiveStep((prevValue) => prevValue + 1);
+        setActiveStep(activeStep + 1);
     }
 
     const getStepRender = (index) => {
         const steps = [
-            <CreateRequestPage1 onNextStep={setNextStep}/>,
+            <CreateRequestPage1 props={stageOne}
+                                changeStageOne={stageOut =>
+                                    setStageOne({...stageOut})
+                                }
+            />,
             <CreateRequestPage2
-                requestDescription={
-                    {
-                        category: requestModel?.category,
-                        theme: requestModel?.theme,
-                        shortName: requestModel?.shortName,
-                        description: requestModel?.description,
-                        descriptionDefect: requestModel?.descriptionDefect,
-                        descriptionDecide: requestModel?.descriptionDecide,
-                        positiveEffect: requestModel?.positiveEffect
-                    }
-                }
+                requestModel={requestModel}
+                inStageOne={stageOne}
                 onChangeDescription={description =>
                     setRequestModel({...requestModel, ...description})
                 }
-            />
+            />,
+            <CreateRequestPage3 props={tablesSaved}
+                                stageOne={stageOne}
+                                onChangeTables={tables => {setTablesSaved({...tablesSaved, ...tables})}}
+                                />,
+            <CreateRequestPage4 stageOne={stageOne}
+                                stageFour={stageFour}
+                                onChangeTables={tables => {setTablesSaved({...tablesSaved, ...tables})}}/>
         ];
         return steps.find((el, i) => {
             return index === i;
         });
+    };
+
+    const sendData = () => {
+        const userInfo = JSON.parse(global.localStorage.user);
+        let dataSave = {
+            category: stageOne.category,
+            suggestion: stageOne.suggestion,
+            shortTitle: stageOne.description,
+            userID: userInfo.id,
+            existingDisadvantages: requestModel.descriptionDefect,
+            solutionDescription: requestModel.descriptionDecide,
+            isEconomy: 1,
+            expectedPositiveEffect: requestModel.positiveEffect,
+            users: [{userID: 5,
+                     percent: 50},
+                    {userID: 4,
+                     percent: 50}],
+            expenditures: tablesSaved.dataStage,
+            termsForImplementation: tablesSaved.dataCostItems,
+        };
+        addApplication(userInfo.id, dataSave)
     };
 
     // render() {
@@ -65,15 +116,19 @@ const TablePage = props => {
                         <Stepper stepsList={stepsOfCreateRequest} onSelectStep={handlerSelectStep}/>
                     </div>
                 </div>
-                <div>
-
+                <div style={{height: '0'}}>
                 </div>
-                <div>
+                <div style={{overflow: 'hidden'}}>
                     { getStepRender(activeStep) }
                 </div>
 
                 <div className="service_panel">
-                    {activeStep > 0 && <Button color="primary" variant="outlined">Сохранить</Button>}
+                    {activeStep > 0 &&
+                    <Button color="primary"
+                            onClick={sendData}
+                            variant="outlined">
+                        Сохранить
+                    </Button>}
                     <Button
                         color="primary"
                         variant="contained"
