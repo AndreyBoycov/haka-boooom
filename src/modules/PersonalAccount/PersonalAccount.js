@@ -34,7 +34,7 @@ const PersonalAccount = (props) => {
     };
 
     const getRequestLinkForDownload = (requestId, format) => {
-        getLinkForDownloadDocument(requestId, format).then(res => {
+        getLinkForDownloadDocument({requestId, format}).then(res => {
             startDownloadFile(res);
         });
     };
