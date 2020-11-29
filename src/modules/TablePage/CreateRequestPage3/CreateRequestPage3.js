@@ -15,29 +15,28 @@ import './CreateRequestPage3.scss';
 // const dataStage = [];
 
 const CreateRequestPage3 = (props) => {
-    const {dataCostItems=[], dataStage=[]} = props.props;
-    const {onChangeTables} = props;
+    const {onChangeTables, stageOne} = props;
 
-    const [costItems, setDataCostItems] = React.useState(dataCostItems);
-    const [stage, setDataStage] = React.useState(dataStage);
+    const [dataCostItems, setDataCostItems] = React.useState(props.props.dataCostItems);
+    const [dataStage, setDataStage] = React.useState(props.props.dataStage);
 
     const changeCostItemValue = (event, index, kye) => {
-        costItems[index][kye] = event.target.value;
-        onChangeTables({costItems, stage})
+        dataCostItems[index][kye] = event.target.value;
+        onChangeTables({dataCostItems, dataStage})
     };
 
     const changeStageValue = (event, index, kye) => {
-        stage[index][kye] = event.target.value;
-        onChangeTables({costItems, stage})
+        dataStage[index][kye] = event.target.value;
+        onChangeTables({dataCostItems, dataStage})
     };
 
     const addCostItems = () => {
         setDataCostItems((prevValue) => [...prevValue, {no: '', nameStage: '', termDays: ''}]);
-        onChangeTables({costItems, stage})
+        onChangeTables({dataCostItems, dataStage})
     };
     const addStage = () => {
         setDataStage((prevValue) => [...prevValue, {no: '', costItems: '', sum: ''}]);
-        onChangeTables({costItems, stage})
+        onChangeTables({dataCostItems, dataStage})
     };
 
     return (
@@ -45,19 +44,15 @@ const CreateRequestPage3 = (props) => {
             <div className='theme-grid-table'>
                 <div className='g-2-table'>
                     <span className='text-c-r-p-3'>Категория:</span>
-                    <span className='text-black-c-r-p-3'>props</span>
-                </div>
-                <div className='g-2-table'>
-                    <span className='text-c-r-p-3'>Тема:</span>
-                    <span className='text-black-c-r-p-3'>props</span>
+                    <span className='text-black-c-r-p-3'>{stageOne.category}</span>
                 </div>
                 <div className='g-2-table'>
                     <span className='text-c-r-p-3'>Краткое наименование:</span>
-                    <span className='text-black-c-r-p-3'>props</span>
+                    <span className='text-black-c-r-p-3'>{stageOne.suggestion}</span>
                 </div>
                 <div className='g-2-table'>
                     <span className='text-c-r-p-3'>Описание</span>
-                    <span className='text-black-c-r-p-3'>props</span>
+                    <span className='text-black-c-r-p-3'>{stageOne.description}</span>
                 </div>
             </div>
             <div className='tables-c-r-p-3'>
@@ -72,7 +67,7 @@ const CreateRequestPage3 = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                        {costItems.map((item, index) => {
+                        {dataCostItems.map((item, index) => {
                             let keys = Object.keys(item);
                             return(
                                 <tr style={index%2 !== 0 ? {backgroundColor: '#FFFFFF', height: '3em'} : {backgroundColor: '#ffe7e7', height: '3em'}}>
@@ -111,7 +106,7 @@ const CreateRequestPage3 = (props) => {
                             </tr>
                         </thead>
                         <tbody>
-                        {stage.map((item, index) => {
+                        {dataStage.map((item, index) => {
                             let keys = Object.keys(item);
                             return(
                                 <tr style={index%2 !== 0 ? {backgroundColor: '#FFFFFF', height: '3em'} : {backgroundColor: '#ffe7e7', height: '3em'}}>

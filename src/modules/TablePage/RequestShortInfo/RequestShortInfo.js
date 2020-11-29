@@ -7,25 +7,14 @@ const RequestShortInfo = (props) => {
 
     return (
         <div className="short_info_block">
-            <div>
                 <span className="green_text">Категория</span>
-                <span>{shortInfo.category?.name}</span>
-            </div>
+                <span>{shortInfoProp.category}</span>
 
-            <div>
-                <span className="green_text">Тема:</span>
-                <span>{shortInfo.theme}</span>
-            </div>
-
-            <div>
                 <span className="green_text">Краткое наименование:</span>
-                <span>{shortInfo.shortName}</span>
-            </div>
+                <span>{shortInfoProp.suggestion}</span>
 
-            <div>
                 <span className="green_text">Описание</span>
-                <span>{shortInfo.description}</span>
-            </div>
+                <span>{shortInfoProp.description}</span>
         </div>
     );
 };

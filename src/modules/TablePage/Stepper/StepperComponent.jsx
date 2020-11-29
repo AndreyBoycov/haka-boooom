@@ -16,15 +16,15 @@ const getSelectedStepIndex = (steps) => {
 }
 
 const StepperComponent = (props) => {
-    const { stepsList, onSelectStep } = props;
-    const [ steps, setSteps ] = useState(stepsList);
+    const { onSelectStep } = props;
+    const [ stepsList, setSteps ] = useState(props.stepsList);
     const [ activeStep, setActiveStep ] = useState(0);
 
     const handleSelectStep = (index) => {
-        if(index > getSelectedStepIndex(steps)) {
+        if(index > getSelectedStepIndex(stepsList)) {
             return;
         }
-        const newStepsList = steps.map((el, i) => {
+        const newStepsList = stepsList.map((el, i) => {
             if (i === index) {
                 el = {...el, completed: true};
             }
@@ -35,7 +35,7 @@ const StepperComponent = (props) => {
     }
 
     const getSteps = () => {
-        return steps.map((step, index) => (
+        return stepsList.map((step, index) => (
                 <Step
                     key={step.name}
                     completed={step.completed}>

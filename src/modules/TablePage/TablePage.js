@@ -18,8 +18,9 @@ const STEPS_LIST = [
 
 const TablePage = props => {
     const [stepsOfCreateRequest, setStepsOfCreateRequest] = useState(STEPS_LIST);
-    const [activeStep, setActiveStep] = useState(1);
-    const [requestModel, setRequestModel] = useState({});
+    const [activeStep, setActiveStep] = useState(0);
+    const [stageOne, setStageOne] = useState({category:'', suggestion:'', description:''});
+    const [requestModel, setRequestModel] = useState({descriptionDefect: '', descriptionDecide: '', positiveEffect: ''});
     const [tablesSaved, setTablesSaved] = useState({dataCostItems: [], dataStage: []});
 
     const handlerSelectStep = (stepsOfCreateRequest, selectStepIndex) => {
@@ -28,24 +29,20 @@ const TablePage = props => {
     }
 
     const setNextStep = () => {
-        setActiveStep((prevValue) => prevValue + 1);
+        setActiveStep(activeStep + 1);
     }
 
     const getStepRender = (index) => {
         const steps = [
-            <CreateRequestPage1 onNextStep={setNextStep}/>,
+            <CreateRequestPage1 onNextStep={setNextStep}
+                                props={stageOne}
+                                changeStageOne={stageOut =>
+                                    setStageOne({...stageOut})
+                                }
+            />,
             <CreateRequestPage2
-                requestDescription={
-                    {
-                        category: requestModel?.category,
-                        theme: requestModel?.theme,
-                        shortName: requestModel?.shortName,
-                        description: requestModel?.description,
-                        descriptionDefect: requestModel?.descriptionDefect,
-                        descriptionDecide: requestModel?.descriptionDecide,
-                        positiveEffect: requestModel?.positiveEffect
-                    }
-                }
+                requestModel={requestModel}
+                inStageOne={stageOne}
                 onChangeDescription={description =>
                     setRequestModel({...requestModel, ...description})
                 }
@@ -53,6 +50,7 @@ const TablePage = props => {
 
             <CreateRequestPage3 onNextStep={setNextStep}
                                 props={tablesSaved}
+                                stageOne={stageOne}
                                 onChangeTables={tables => {setTablesSaved({...tablesSaved, ...tables})}}
                                 />,
         ];
